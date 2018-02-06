@@ -89,7 +89,7 @@ public class Route_select extends AppCompatActivity {
     SharedPreferences prefs;
     String place_address1,place_address2,str_start_date,str_end_date,str_start_time,str_trip_title,str_trip_info,str_trip_type,str_aprox_km,str_aprox_cost;
     Button save_trip;
-    private String url="http://192.168.4.101/Riders/insert.php";
+    private String url="http://192.168.20.29/Riders/insert.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,10 +182,10 @@ public class Route_select extends AppCompatActivity {
                                         params.put("aprox_cost", str_aprox_cost);
                                         params.put("start_adr",place_address1);
                                         params.put("end_adr",place_address2);
-//                                        params.put("start_lat",String.valueOf(start_lat));
-//                                        params.put("start_lng",String.valueOf(start_lng));
-//                                        params.put("end_lat",String.valueOf(end_lat));
-//                                        params.put("end_lng",String.valueOf(end_lng));
+                                        params.put("start_lat",String.valueOf(start_lat));
+                                        params.put("start_lng",String.valueOf(start_lng));
+                                        params.put("end_lat",String.valueOf(end_lat));
+                                        params.put("end_lng",String.valueOf(end_lng));
 
 
 
@@ -252,9 +252,9 @@ public class Route_select extends AppCompatActivity {
 
 
 
-                    };
+                    }
                 });
-            };
+            }
         });
 
     }
