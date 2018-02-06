@@ -42,6 +42,7 @@ dependencies {
     implementation('com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.8.0') {
         transitive = true
     }
+    compile 'com.jaredrummler:material-spinner:1.1.0'
     compile 'com.google.android.gms:play-services-location:11.0.2'
     compile 'com.google.android.gms:play-services-places:11.0.2'
     compile 'com.android.support:design:26.1.0'
