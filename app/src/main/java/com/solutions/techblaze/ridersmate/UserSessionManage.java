@@ -30,6 +30,9 @@ public class UserSessionManage {
 
 
     public static final String KEY_U_NAME = "u_name";
+    public static final String KEY_F_NAME = "f_name";
+    public static final String KEY_L_NAME = "l_name";
+    public static final String KEY_EMAIL = "email";
 
 
     public UserSessionManage(Context context){
@@ -38,7 +41,7 @@ public class UserSessionManage {
         editor = pref.edit();
     }
 
-    public void createUserLoginSession(String uid, String u_name){
+    public void createUserLoginSession(String uid, String u_name,String f_name,String l_name,String email){
         // Storing login value as TRUE
         editor.putBoolean(IS_USER_LOGIN, true);
 
@@ -46,7 +49,9 @@ public class UserSessionManage {
         //editor.putString(KEY_UID, response);
         editor.putString(KEY_UID,uid);
         editor.putString(KEY_U_NAME,u_name);
-
+        editor.putString(KEY_F_NAME,f_name);
+        editor.putString(KEY_L_NAME,l_name);
+        editor.putString(KEY_EMAIL,email);
         editor.commit();
     }
 

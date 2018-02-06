@@ -54,7 +54,7 @@
         <activity
             android:name=".Rider_Home"
             android:label="Riders Mate"
-            android:theme="@style/MyTheme"/>
+            android:theme="@style/MyTheme" />
 
         <service
             android:name=".Location_service"
@@ -69,7 +69,10 @@
         <activity
             android:name=".Trip_defenition"
             android:theme="@style/MyTheme" />
-        <activity android:name=".Route_select"
+        <activity
+            android:name=".Route_select"
+            android:theme="@style/MyTheme" />
+        <activity android:name=".Edit_User_details"
             android:theme="@style/MyTheme"></activity>
     </application>
 

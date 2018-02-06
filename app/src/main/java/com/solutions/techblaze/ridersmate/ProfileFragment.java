@@ -5,12 +5,14 @@ package com.solutions.techblaze.ridersmate;
  */
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -72,6 +74,17 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         final CountryAdapter adapter = new CountryAdapter(getActivity(), countryList);
         lvCountry.setAdapter(adapter);
         lvCountry.setTextFilterEnabled(true);
+        lvCountry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i)
+                {
+                    case 1:
+                        Intent edit_prof=new Intent(getActivity(),Edit_User_details.class);
+                        startActivity(edit_prof);
+                }
+            }
+        });
 
 
         return v;

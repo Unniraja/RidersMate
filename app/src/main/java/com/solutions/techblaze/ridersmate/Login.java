@@ -75,7 +75,9 @@ public class Login extends AppCompatActivity {
                                 Log.e("Main", response.toString());
                                 profilePictureView.setPresetSize(ProfilePictureView.NORMAL);
                                 try {
-                                    sessionManage.createUserLoginSession(object.getString("id"),object.getString("name"));
+                                    sessionManage.createUserLoginSession(object.getString("id"),object.getString("name"),
+                                            object.getString("first_name"),object.getString("last_name"),object.getString("email"));
+                                    //Toast.makeText(getApplicationContext(),"First name : "+object.getString("first_name"),Toast.LENGTH_SHORT).show();
                                     profilePictureView.setProfileId(object.getString("id"));
                                 }
                                 catch (JSONException e) {
@@ -86,7 +88,7 @@ public class Login extends AppCompatActivity {
                             }
                         });
                 Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,email,gender, birthday");
+                parameters.putString("fields", "id,name,first_name,last_name,email,gender, birthday");
                 request.setParameters(parameters);
                 request.executeAsync();
 
