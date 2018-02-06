@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/cardView">
+
+            <ImageView
+                android:id="@+id/imageView_trip"
+                android:layout_width="120dp"
+                android:layout_height="100dp"
+                android:contentDescription="TODO"
+                android:src="@drawable/bike" />
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/host_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/cardView"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/cardView"
+            android:textColor="#0e062e"
+            android:layout_marginBottom="9dp"
+
+            android:text="Hosted by : Unniraja" />
+
+        <TextView
+            android:id="@+id/trip_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/cardView"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/cardView"
+            android:layout_toRightOf="@+id/host_by"
+            android:text="Kochi To Kodaikanal"
+            android:textColor="#3e0204"
+            android:textSize="16sp"
+             />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_above="@+id/button5"
+            android:layout_alignLeft="@+id/button5"
+            android:layout_alignStart="@+id/button5"
+            android:layout_marginBottom="12dp"
+            android:background="#55a140"
+            android:text="Im Going"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignEnd="@+id/trip_title"
+            android:layout_alignRight="@+id/trip_title"
+            android:layout_below="@+id/cardView"
+            android:layout_marginEnd="6dp"
+            android:layout_marginRight="6dp"
+            android:background="#9b1315"
+            android:text="Not Going"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="10sp" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+</RelativeLayout>
