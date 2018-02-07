@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.login.widget.ProfilePictureView;
 
@@ -82,6 +84,20 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                     case 1:
                         Intent edit_prof=new Intent(getActivity(),Edit_User_details.class);
                         startActivity(edit_prof);
+                        break;
+
+                    case 3:
+                        Intent motor=new Intent(getActivity(),Manage_Motorcycle.class);
+                        startActivity(motor);
+                        break;
+                    case 6:
+                        Intent insurance=new Intent(getActivity(),Manage_Insurance_Certificate.class);
+                        startActivity(insurance);
+                        break;
+                    case 7:
+                        Intent pollution=new Intent(getActivity(),Manage_Polution_Certificate.class);
+                        startActivity(pollution);
+                        break;
                 }
             }
         });
@@ -187,6 +203,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                 // if item
                 convertView = inflater.inflate(R.layout.layout_item, parent, false);
                 TextView tvItemTitle = (TextView) convertView.findViewById(R.id.tvItemTitle);
+
                 tvItemTitle.setText(((EntryItem) item.get(position)).getTitle());
             }
 

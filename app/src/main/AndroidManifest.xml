@@ -72,7 +72,16 @@
         <activity
             android:name=".Route_select"
             android:theme="@style/MyTheme" />
-        <activity android:name=".Edit_User_details"
+        <activity
+            android:name=".Edit_User_details"
+            android:theme="@style/MyTheme" />
+        <activity
+            android:name=".Manage_Motorcycle"
+            android:theme="@style/MyTheme" />
+        <activity
+            android:name=".Manage_Polution_Certificate"
+            android:theme="@style/MyTheme" />
+        <activity android:name=".Manage_Insurance_Certificate"
             android:theme="@style/MyTheme"></activity>
     </application>
 
