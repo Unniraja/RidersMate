@@ -47,4 +47,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-places:11.0.2'
     compile 'com.android.support:design:26.1.0'
     implementation files('libs/volley.jar')
+    implementation 'com.squareup.picasso:picasso:2.3.2'
 }

@@ -5,6 +5,7 @@ package com.solutions.techblaze.ridersmate;
  */
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +26,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.facebook.login.widget.ProfilePictureView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,14 +46,22 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.solutions.techblaze.ridersmate.adapters.New_feed_adapter;
 import com.solutions.techblaze.ridersmate.models.Home_new_feed;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends android.support.v4.app.Fragment {
-    private ProfilePictureView profilePictureView;
+    private ProfilePictureView profilePictureView,popup_pro_pic;
+
+    private TextView user;
     SharedPreferences prefs;
     String user_id,user_name;
     String users[]={"100000219454975","100001143796013"};
+    JsonArrayRequest req;
+    String url="http://192.168.4.104/Riders/select_user_posts.php";
 
 //    ListView new_feed_list;
 //    New_feed_adapter adapter;
@@ -53,6 +69,7 @@ private List<Home_new_feed> feedList = new ArrayList<>();
     private RecyclerView recyclerView;
     private New_feed_adapter mAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private TextView new_post;
 
     public static HomeFragment newInstance() {
 
@@ -67,6 +84,8 @@ private List<Home_new_feed> feedList = new ArrayList<>();
 
         prefs = getActivity().getSharedPreferences("Login", 0);
         user_id=prefs.getString("uid", null);
+        user_name=prefs.getString("f_name", null);
+        new_post=(TextView)v.findViewById(R.id.new_post);
 
         profilePictureView.setPresetSize(ProfilePictureView.NORMAL);
         profilePictureView.setProfileId(user_id);
@@ -80,12 +99,34 @@ private List<Home_new_feed> feedList = new ArrayList<>();
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        prepareMovieData();
+        get_my_posts();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 feedList.clear();
-                prepareMovieData();
+                get_my_posts();
+            }
+        });
+        new_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                // dialog.setContentView(R.layout.alert_list_radio);
+
+                View customView = LayoutInflater.from(getActivity()).inflate(
+                        R.layout.popup_new_feed, null, false);
+                popup_pro_pic = (ProfilePictureView)customView.findViewById(R.id.user_profile);
+                user=(TextView)customView.findViewById(R.id.user_name_fb);
+
+                popup_pro_pic.setPresetSize(ProfilePictureView.NORMAL);
+                popup_pro_pic.setProfileId(user_id);
+                user.setText(user_name);
+
+                dialog.setView(customView);
+
+                dialog.show();
+
+
             }
         });
 
@@ -95,9 +136,63 @@ private List<Home_new_feed> feedList = new ArrayList<>();
 //        adapter=new New_feed_adapter(getActivity(),users);
 //        new_feed_list.setAdapter(adapter);
 
-
+      //  get_my_posts();
 
         return v;
+
+    }
+
+    public void get_my_posts()
+    {
+
+        RequestQueue queue= Volley.newRequestQueue(getActivity().getApplicationContext());
+        req=new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                // Toast.makeText(getActivity().getApplicationContext(),response.toString(),Toast.LENGTH_LONG).show();
+                //  JSONObject json_data = new JSONObject(response);
+                for(int i=0;i<response.length();i++)
+                {
+
+
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        Home_new_feed f_list = new Home_new_feed();
+                        f_list.setProPic(obj.getString("fb_id"));
+                        f_list.setCaption(obj.getString("post_caption"));
+                        f_list.setImg_name(obj.getString("img_name"));
+                        f_list.setName(obj.getString("name"));
+
+                        feedList.add(f_list);
+
+                    }
+                    catch (JSONException e)
+                    {
+
+                    }
+                }
+
+                mAdapter.notifyDataSetChanged();
+                onItemsLoadComplete();
+
+
+
+
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+
+        });
+        queue.add(req);
+
+
 
     }
 
@@ -109,15 +204,15 @@ private List<Home_new_feed> feedList = new ArrayList<>();
         swipeRefreshLayout.setRefreshing(false);
     }
     private void prepareMovieData() {
-        Home_new_feed f_list = new Home_new_feed("100000219454975");
-        feedList.add(f_list);
-
-        f_list = new Home_new_feed("100001143796013");
-        feedList.add(f_list);
-
-
-
-        mAdapter.notifyDataSetChanged();
+//        Home_new_feed f_list = new Home_new_feed("100000219454975");
+//        feedList.add(f_list);
+//
+//        f_list = new Home_new_feed("100001143796013");
+//        feedList.add(f_list);
+//
+//
+//
+//        mAdapter.notifyDataSetChanged();
         onItemsLoadComplete();
     }
 

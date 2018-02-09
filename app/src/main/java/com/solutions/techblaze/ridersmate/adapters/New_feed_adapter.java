@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.facebook.login.widget.ProfilePictureView;
 import com.solutions.techblaze.ridersmate.R;
 import com.solutions.techblaze.ridersmate.models.Home_new_feed;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +28,20 @@ public class New_feed_adapter extends RecyclerView.Adapter<New_feed_adapter.MyVi
 
     private List<Home_new_feed> feed_list;
     int flag=0;
+    String url="http://192.168.4.104/Riders/images/new_posts/";
+    private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView like_option, year, genre;
+        public TextView like_option, caption,name;
+        public ImageView post_image;
         public ProfilePictureView profilePictureView;
 
         public MyViewHolder(View view) {
             super(view);
            like_option = (TextView) view.findViewById(R.id.like_option);
-//            genre = (TextView) view.findViewById(R.id.genre);
+           caption = (TextView) view.findViewById(R.id.caption_text);
+           name = (TextView) view.findViewById(R.id.name);
+           post_image=(ImageView)view.findViewById(R.id.post_img);
 //            year = (TextView) view.findViewById(R.id.year);
             profilePictureView=(ProfilePictureView)view.findViewById(R.id.profilePictureView);
         }
@@ -50,6 +56,7 @@ public class New_feed_adapter extends RecyclerView.Adapter<New_feed_adapter.MyVi
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.new_feed_item, parent, false);
+        context = parent.getContext();
 
         return new MyViewHolder(itemView);
     }
@@ -60,6 +67,9 @@ public class New_feed_adapter extends RecyclerView.Adapter<New_feed_adapter.MyVi
 
         holder.profilePictureView.setPresetSize(ProfilePictureView.NORMAL);
         holder.profilePictureView.setProfileId(feed.getProPic());
+        holder.caption.setText(feed.getCaption());
+        holder.name.setText(feed.getName());
+        Picasso.with(context).load(url+feed.getImg_name()).into(holder.post_image);
         holder.like_option.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
