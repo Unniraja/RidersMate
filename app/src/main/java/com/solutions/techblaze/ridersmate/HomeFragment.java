@@ -8,6 +8,7 @@ import android.Manifest;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -15,11 +16,17 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
+import com.facebook.login.widget.ProfilePictureView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -28,11 +35,24 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.solutions.techblaze.ridersmate.adapters.New_feed_adapter;
+import com.solutions.techblaze.ridersmate.models.Home_new_feed;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends android.support.v4.app.Fragment {
-    MapView m;
-    GoogleMap googleMap;
-    Button bt_start;
+    private ProfilePictureView profilePictureView;
+    SharedPreferences prefs;
+    String user_id,user_name;
+    String users[]={"100000219454975","100001143796013"};
+
+//    ListView new_feed_list;
+//    New_feed_adapter adapter;
+private List<Home_new_feed> feedList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private New_feed_adapter mAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public static HomeFragment newInstance() {
 
@@ -43,107 +63,63 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+        profilePictureView = (ProfilePictureView)v.findViewById(R.id.user_profile);
 
-        m = (MapView) v.findViewById(R.id.mapView);
-        bt_start = (Button) v.findViewById(R.id.button);
-        bt_start.setOnClickListener(new View.OnClickListener() {
+        prefs = getActivity().getSharedPreferences("Login", 0);
+        user_id=prefs.getString("uid", null);
+
+        profilePictureView.setPresetSize(ProfilePictureView.NORMAL);
+        profilePictureView.setProfileId(user_id);
+        swipeRefreshLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipeRefreshLayout);
+
+        recyclerView = (RecyclerView)v.findViewById(R.id.recycler_view);
+
+        mAdapter = new New_feed_adapter(feedList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext()) ;
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+
+        prepareMovieData();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View view) {
-                getActivity().startService(new Intent(getActivity(), Location_service.class));
+            public void onRefresh() {
+                feedList.clear();
+                prepareMovieData();
             }
         });
 
-        m.onCreate(savedInstanceState);
-        try {
-            MapsInitializer.initialize(getActivity().getApplicationContext());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        m.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap mMap) {
-                googleMap = mMap;
 
-                // For showing a move to my location button
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                googleMap.setMyLocationEnabled(true);
+//        new_feed_list=(ListView)v.findViewById(R.id.new_feed_list);
+//        adapter=new New_feed_adapter(getActivity(),users);
+//        new_feed_list.setAdapter(adapter);
 
-                LocationManager locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
-                Criteria criteria = new Criteria();
 
-                Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-                if (location != null)
-                {
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
-
-                    CameraPosition cameraPosition = new CameraPosition.Builder()
-                            .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
-                            .zoom(17)                   // Sets the zoom
-                            .bearing(90)                // Sets the orientation of the camera to east
-                            .tilt(40)                   // Sets the tilt of the camera to 30 degrees
-                            .build();                   // Creates a CameraPosition from the builder
-                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                }
-
-                // For dropping a marker at a point on the Map
-
-            }
-        });
 
         return v;
 
     }
-    @Override
 
-    public void onResume() {
+    void onItemsLoadComplete() {
+        // Update the adapter and notify data set changed
+        // ...
 
-        super.onResume();
+        // Stop refresh animation
+        swipeRefreshLayout.setRefreshing(false);
+    }
+    private void prepareMovieData() {
+        Home_new_feed f_list = new Home_new_feed("100000219454975");
+        feedList.add(f_list);
 
-        m.onResume();
+        f_list = new Home_new_feed("100001143796013");
+        feedList.add(f_list);
 
+
+
+        mAdapter.notifyDataSetChanged();
+        onItemsLoadComplete();
     }
 
-
-
-    @Override
-
-    public void onPause() {
-
-        super.onPause();
-
-        m.onPause();
-
-    }
-
-
-    @Override
-
-    public void onDestroy() {
-
-        super.onDestroy();
-
-        m.onDestroy();
-
-    }
-
-
-    @Override
-    public void onLowMemory() {
-
-        super.onLowMemory();
-
-        m.onLowMemory();
-
-    }
 
 }
