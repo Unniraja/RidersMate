@@ -84,7 +84,10 @@
         <activity
             android:name=".Manage_Insurance_Certificate"
             android:theme="@style/MyTheme" />
-        <activity android:name=".New_status_update"
+        <activity
+            android:name=".New_status_update"
+            android:theme="@style/MyTheme" />
+        <activity android:name=".Trip_detail_view"
             android:theme="@style/MyTheme"></activity>
     </application>
 

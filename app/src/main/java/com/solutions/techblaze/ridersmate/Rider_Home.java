@@ -44,6 +44,10 @@ public class Rider_Home extends AppCompatActivity {
                     case R.id.navigation_home:
                         loadHomeFragment();
                         return true;
+                    case R.id.navigation_friends:
+
+                        loadFriendsFragment();
+                        return true;
                     case R.id.navigation_dashboard:
 
                         loadSettingsFragment();
@@ -77,6 +81,13 @@ public class Rider_Home extends AppCompatActivity {
     private void loadSettingsFragment() {
 
         DashboardFragment fragment = DashboardFragment.newInstance();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, fragment);
+        ft.commit();
+    }
+    private void loadFriendsFragment() {
+
+        FriendsFragment fragment = FriendsFragment.newInstance();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.commit();

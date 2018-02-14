@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.solutions.techblaze.ridersmate.Trip_detail_view">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        app:srcCompat="@drawable/bikesforlife"
+
+        android:scaleType="centerCrop"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        app:cardCornerRadius="10dp"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="172dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="36dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="22dp"
+                android:text="Moonar"
+                android:textColor="#483f6e"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView5"
+                android:layout_marginLeft="26dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="8dp"
+                android:drawablePadding="3dip"
+                android:drawableLeft="@drawable/ic_clocks"
+                android:gravity="center"
+                android:text="31 December 2018 | 7:00 am" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textView9"
+                android:layout_alignStart="@+id/textView9"
+                android:layout_below="@+id/textView9"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_location_mark"
+                android:drawablePadding="3dip"
+                android:gravity="center"
+                android:text="Ernakulam,India" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView10"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="48dp"
+                android:background="@drawable/border"
+                android:lines="5"
+                android:padding="10dp"
+
+                android:text="Riding a motorcycle on today's highways, you have to ride in a very defensive manner. You have to be a good rider and you have to have both hands and both feet on the controls at all times" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textView10"
+                android:layout_alignStart="@+id/textView10"
+                android:layout_below="@+id/textView12"
+                android:layout_marginTop="11dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Host" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/textView12"
+                android:layout_alignRight="@+id/textView12"
+                android:layout_below="@+id/textView10"
+                android:layout_marginTop="9dp"
+                android:id="@+id/cardView9">
+
+                <Button
+                    android:id="@+id/im_going"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:background="#f76b6b"
+                    android:drawableLeft="@drawable/ic_tick"
+                    android:text="Im going"
+                    android:textAllCaps="false"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignLeft="@+id/textView12"
+                android:layout_alignStart="@+id/textView12"
+                android:layout_alignTop="@+id/cardView9">
+
+                <Button
+                    android:id="@+id/route_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:background="@color/colorPrimary"
+                    android:drawableLeft="@drawable/ic_pins"
+                    android:text="Route"
+                    android:textAllCaps="false"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textView13"
+                android:layout_alignStart="@+id/textView13"
+                android:layout_below="@+id/textView13"
+                android:layout_marginTop="12dp">
+
+                <com.facebook.login.widget.ProfilePictureView
+                    android:id="@+id/user_profile"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textView12"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/textView12"
+
+                android:textAllCaps="false"
+                android:textColor="@android:color/darker_gray"
+                android:drawableLeft="@drawable/ic_normal_love"
+                android:background="@android:color/transparent"
+                android:text="30 likes" />
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/button6"
+                android:layout_alignEnd="@+id/textView12"
+                android:layout_alignRight="@+id/textView12"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"
+                android:textColor="@android:color/darker_gray"
+                android:drawableLeft="@drawable/ic_comment"
+                android:text="comments" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

@@ -10,4 +10,5 @@
     <color name="mapboxYellow">#d9d838</color>
     <color name="mapboxRed">#b43b71</color>
     <color name="likecolor">#f96161</color>
+    <color name="bt_back">#1b9623</color>
 </resources>

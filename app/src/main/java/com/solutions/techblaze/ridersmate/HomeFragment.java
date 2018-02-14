@@ -132,6 +132,7 @@ private List<Home_new_feed> feedList = new ArrayList<>();
 
 
 
+
 //        new_feed_list=(ListView)v.findViewById(R.id.new_feed_list);
 //        adapter=new New_feed_adapter(getActivity(),users);
 //        new_feed_list.setAdapter(adapter);

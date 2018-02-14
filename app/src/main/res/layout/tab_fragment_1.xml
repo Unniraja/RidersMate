@@ -4,12 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/my_trip_list"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="4dp"/>
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="12dp"
+
+        android:layout_marginTop="12dp">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+
+
+            />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>
