@@ -87,8 +87,11 @@
         <activity
             android:name=".New_status_update"
             android:theme="@style/MyTheme" />
-        <activity android:name=".Trip_detail_view"
-            android:theme="@style/MyTheme"></activity>
+        <activity
+            android:name=".Trip_detail_view"
+            android:theme="@style/MyTheme" />
+        <activity android:name=".Profile_public_view"
+            android:theme="@style/MyTheme" ></activity>
     </application>
 
 </manifest>

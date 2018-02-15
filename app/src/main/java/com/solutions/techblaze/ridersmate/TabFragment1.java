@@ -12,13 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.solutions.techblaze.ridersmate.adapters.My_Trips_Adapter;
-import com.solutions.techblaze.ridersmate.adapters.My_Trips_custom_Adapter;
-import com.solutions.techblaze.ridersmate.adapters.New_feed_adapter;
+import com.solutions.techblaze.ridersmate.adapters.My_Friends_custom_Adapter;
 import com.solutions.techblaze.ridersmate.interfaces.CustomItemClickListener;
-import com.solutions.techblaze.ridersmate.models.Home_new_feed;
 import com.solutions.techblaze.ridersmate.models.My_Event_Model;
 
 import java.util.ArrayList;
@@ -31,8 +28,9 @@ import java.util.List;
 public class TabFragment1 extends Fragment {
     List<String> title=new ArrayList<String>();
     List<String> host_by=new ArrayList<String>();
+
     ListView my_trip_list;
-    My_Trips_custom_Adapter adapter;
+    My_Friends_custom_Adapter adapter;
     private List<My_Event_Model> feedList = new ArrayList<>();
     private RecyclerView recyclerView;
     private My_Trips_Adapter mAdapter;
