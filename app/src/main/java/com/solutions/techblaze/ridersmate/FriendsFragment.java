@@ -1,13 +1,16 @@
 package com.solutions.techblaze.ridersmate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.solutions.techblaze.ridersmate.adapters.My_Friends_custom_Adapter;
 
@@ -42,6 +45,14 @@ public class FriendsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_friends, container, false);
         my_friend_list=(ListView)v.findViewById(R.id.friend_list);
+        my_friend_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity().getApplicationContext(),""+i,Toast.LENGTH_SHORT).show();
+                Intent pro_pub=new Intent(getActivity(),Profile_public_view.class);
+                startActivity(pro_pub);
+            }
+        });
         user_names.add("Unniraja");
         user_names.add("Sreekanth");
         my_places.add("vaikom,kerala");
@@ -50,6 +61,7 @@ public class FriendsFragment extends Fragment {
         fb_id.add("100000219454975");
         adapter=new My_Friends_custom_Adapter(getActivity(),user_names,my_places,fb_id);
         my_friend_list.setAdapter(adapter);
+
 
 
 
